@@ -8,6 +8,7 @@ import WeekDaysSelector from "../WeekDaysSelector";
 
 import { FunctionComponent, useContext, useEffect } from "react";
 import RecurrenceContext from "../RecurrenceContext";
+import { FormLabel, InputLabel, Typography } from "@mui/material";
 
 const FREQUENCY_OPTIONS: Option[] = [
   // {
@@ -93,40 +94,45 @@ const FrequencySelector: FunctionComponent = () => {
   }, [recurrence.frequency]);
 
   return (
-    <div>
-      <Grid item xs={12} md={4}>
-        <DropDown
-          name="frequency"
-          value={recurrence.frequency}
-          onChange={handleFrequencyChange}
-          label="Frequency"
-          options={FREQUENCY_OPTIONS}
-          data-testid="recurrence-frequency"
-        />
-      </Grid>
-      {recurrence.frequency !== FrequencyType.None && (
-        <Grid item xs={12} md={4}>
+    <React.Fragment>
+      <Grid container justifyItems="center" alignItems="center">
+        <Grid item xs={12} md={4} lg={4}>
+          <FormLabel component="legend">Repeats Every</FormLabel>
+        </Grid>
+        <Grid item xs={12} md={4} lg={4}>
           <NumberInput
             name="number-of-repetition"
             value={recurrence.numberOfRepetitions}
             onChange={handleNumberOfRepetitionChange}
-            adornmentLabel={getRepetitionsLabelByFrequency()}
+            // adornmentLabel={getRepetitionsLabelByFrequency()}
             data-testid="recurrence-number-of-repetitions"
           />
         </Grid>
-      )}
+        <Grid item xs={12} md={4} lg={4}>
+          <DropDown
+            name="frequency"
+            value={recurrence.frequency}
+            onChange={handleFrequencyChange}
+            label="Frequency"
+            options={FREQUENCY_OPTIONS}
+            data-testid="recurrence-frequency"
+            sx={{ width: "100%" }}
+          />
+        </Grid>
 
-      {recurrence.frequency === FrequencyType.Weekly && (
-        <Fade in={recurrence.frequency === FrequencyType.Weekly}>
-          <Grid item sm={12}>
-            <WeekDaysSelector
-              weekDaysRepetition={recurrence.weekDaysRepetition}
-              onDayClicked={handleWeekDaysChange}
-            />
-          </Grid>
-        </Fade>
-      )}
-    </div>
+        {recurrence.frequency === FrequencyType.Weekly && (
+          <Fade in={recurrence.frequency === FrequencyType.Weekly}>
+            <Grid item sm={12} mt={2}>
+              <FormLabel component="legend">Repeats On</FormLabel>
+              <WeekDaysSelector
+                weekDaysRepetition={recurrence.weekDaysRepetition}
+                onDayClicked={handleWeekDaysChange}
+              />
+            </Grid>
+          </Fade>
+        )}
+      </Grid>
+    </React.Fragment>
   );
 };
 export default FrequencySelector;

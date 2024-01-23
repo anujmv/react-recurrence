@@ -1,5 +1,5 @@
 import { RecurrenceDay } from "../types";
-import { Tooltip, Button } from "@mui/material";
+import { Tooltip, Button, Box } from "@mui/material";
 
 export interface WeekDaysSelectorProps {
   // Use WithStyles in WeekDaysSelectorProps
@@ -60,7 +60,7 @@ const WeekDaysSelector = ({
     onDayClicked(newDaysList);
   };
   return (
-    <div data-testid="recurrence-week-days-selector">
+    <Box data-testid="recurrence-week-days-selector">
       {DEFAULT_WEEK_DAYS.map((day) => (
         <Tooltip
           key={`${day.title}-${day.key}-tooltip`}
@@ -70,9 +70,19 @@ const WeekDaysSelector = ({
           <Button
             key={`${day.key}-btn`}
             sx={{
-              backgroundColor: weekDaysRepetition.includes(day.key)
-                ? "#e0e0e0"
-                : "#ffffff",
+              minWidth: "30px",
+              width: "30px",
+              height: "30px",
+              borderRadius: "50%",
+              mx: 1,
+              mt: 2,
+              ...(weekDaysRepetition.includes(day.key)
+                ? { backgroundColor: "#3f51b5", color: "#fff" }
+                : { backgroundColor: "#e0e0e0" }),
+              ":hover": {
+                backgroundColor: "#3f51b5",
+                color: "#fff",
+              },
             }}
             onClick={() => handleDayClicked(day)}
             data-testid={`weekdays-${day.key}`}
@@ -81,7 +91,7 @@ const WeekDaysSelector = ({
           </Button>
         </Tooltip>
       ))}
-    </div>
+    </Box>
   );
 };
 

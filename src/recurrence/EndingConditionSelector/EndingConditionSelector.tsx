@@ -56,7 +56,7 @@ const EndingConditionSelector = ({}) => {
           value={recurrence.endingCondition}
           onChange={handleEndingConditionChange}
         >
-          <Grid container spacing={1}>
+          <Grid container spacing={1} mt={1}>
             <Grid item sm={6}>
               <FormControlLabel
                 value={EndingConditionType.None}
@@ -70,7 +70,7 @@ const EndingConditionSelector = ({}) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} mt={1}>
             <Grid item sm={6} container>
               <FormControlLabel
                 value={EndingConditionType.EndDate}
@@ -87,6 +87,7 @@ const EndingConditionSelector = ({}) => {
               <DatePicker
                 name="end-date"
                 label="End"
+                slotProps={{ textField: { size: "small" } }}
                 value={recurrence.endDate}
                 onChange={handleEndDateChange}
                 disabled={
@@ -100,7 +101,7 @@ const EndingConditionSelector = ({}) => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} mt={1}>
             <Grid item sm={6} container alignItems="flex-start">
               <FormControlLabel
                 value={EndingConditionType.OccurrencesNumber}
@@ -123,6 +124,7 @@ const EndingConditionSelector = ({}) => {
                   recurrence.endingCondition !==
                   EndingConditionType.OccurrencesNumber
                 }
+                size="small"
                 inputProps={{
                   "data-testid":
                     "recurrence-ending-condition-occurrences-number",

@@ -17,7 +17,8 @@ const StartDateSelector: FunctionComponent = () => {
       label="Start"
       value={recurrence.startDate}
       onChange={handleStartDateChange}
-      data-testid="recurrence-start-date"
+      data-testid="recurrence-startdate"
+      sx={{ width: "100%" }}
     />
   );
 };

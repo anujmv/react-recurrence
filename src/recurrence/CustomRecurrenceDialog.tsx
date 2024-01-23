@@ -12,11 +12,15 @@ import CustomRecurrenceComponent from "./CustomRecurrenceComponent";
 type CustomRecurrenceDialogProps = {
   setOpen: (open: boolean) => void;
   open: boolean;
+  setRecurrence: (recurrence: any) => void;
+  handleRepeatChange: (value: string | null, dateString: string) => void;
 };
 
 const CustomRecurrenceDialog: React.FC<CustomRecurrenceDialogProps> = ({
   setOpen,
   open,
+  setRecurrence,
+  handleRepeatChange,
 }) => {
   const handleOpen = () => {
     setOpen(true);
@@ -28,11 +32,14 @@ const CustomRecurrenceDialog: React.FC<CustomRecurrenceDialogProps> = ({
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
         <DialogTitle>Custom Recurrence</DialogTitle>
         <DialogContent>
           <Box mt={2}>
-            <CustomRecurrenceComponent />
+            <CustomRecurrenceComponent
+              handleRepeatChange={handleRepeatChange}
+              setRecurrence={setRecurrence}
+            />
           </Box>
         </DialogContent>
         <DialogActions>
